@@ -21,7 +21,7 @@ class AuthController extends Controller
             'password' => 'required|between:6,25|confirmed'
         ]);
 
-        $user = new User($request->getAll());
+        $user = new User($request->all());
         $user->password = bcrypt($request->password);
         $user->save();
 

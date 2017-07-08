@@ -7,3 +7,26 @@
 
 // Bootstrap
 @import "node_modules/bootstrap/scss/bootstrap";
+
+.form {
+  background: #e9ebee;
+  box-shadow: rgba(0, 0, 0, 0.09) 0 1px 0;
+  width: 40%;
+  margin: 100px auto;
+  padding: 15px;
+    &_title {
+      color: black;
+    }
+    &_error {
+      color: #e53935;;
+    }
+}
+
+.navbar a {
+  color: #FFFFFF;
+  padding: 0.5rem;
+}
+
+ul.navbar-nav.mr-auto {
+  padding-left: 95rem;
+}
