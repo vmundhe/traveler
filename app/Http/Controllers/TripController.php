@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Trip;
+use App\User;
 use File;
 
 
@@ -53,7 +54,7 @@ class TripController extends Controller
         $trip = new Trip($request->only('title', 'trip_date', 'trip_duration', 'description'));
         $trip->image = $filename;
 
-        $trip->user()->trips()->save($trip);
+        $request->user()->trips()->save($trip);
 
         return response()
             ->json([
