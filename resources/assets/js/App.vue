@@ -11,6 +11,9 @@
                 <li class="nav-item">
                     <router-link to="/register" v-if="guest">Register</router-link>
                 </li>
+                <li class="nav-item"  v-if="auth">
+                    <router-link to="/trips/create">Publish Trip</router-link>
+                </li>
                 <li class="nav-item" v-if="auth">
                     <a @click.stop="logout">Logout</a>
                 </li>
