@@ -3,12 +3,12 @@
         <div class="trip_row">
             <div class="trip_image">
                 <div class="trip_box">
-                    <img class="preview" :src="`/images/${trip.image}`" v-if="trip.image">
+                    <img class="preview_show" :src="`/images/${trip.image}`" v-if="trip.image">
                 </div>
             </div>
             <div class="trip_details">
                 <div class="trip_details_inner">
-                    <small>Submitted by: {{trip.user.name}}</small>
+                    <small>Published by: {{trip.user.name}}</small>
                     <h1 class="trip_title">{{trip.title}}</h1>
                     <p class="trip_description">{{trip.description}}</p>
                     <div v-if="authState.api_token && authState.user_id === trip.user_id">

@@ -1,6 +1,6 @@
 <template>
     <div class="image__preview" v-if="image">
-        <img class="preview" :src="image">
+        <img class="preview_show" :src="image">
         <button class="btn btn__danger image__close" @click="close">
             &times;
         </button>
