@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddImageToUsers extends Migration
+class CreateCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class AddImageToUsers extends Migration
      */
     public function up()
     {
-        Schema::table('users', function($table) {
-            $table->string('image');
+        Schema::create('comments', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('trip_id')->unsigned();
+            $table->integer('user_id')->unsigned();
+            $table->string('body');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ class AddImageToUsers extends Migration
      */
     public function down()
     {
-        Schema::table('users', function($table) {
-            $table->dropColumn('image');
-        });
+        Schema::dropIfExists('comments');
     }
 }
