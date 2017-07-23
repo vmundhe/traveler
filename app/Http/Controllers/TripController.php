@@ -6,22 +6,33 @@ use Illuminate\Http\Request;
 use App\Trip;
 use App\User;
 use File;
+use Illuminate\Support\Facades\Auth;
 
 
 class TripController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api')->except(['index', 'show']);
+        $this->middleware('auth:api');
     }
 
     public function index()
     {
-        $trips = Trip::orderBy('created_at', 'desc')->get(['id', 'title', 'trip_date', 'trip_duration', 'image']);
+        $trips = Trip::orderBy('created_at', 'desc')->get(['id', 'title', 'trip_date', 'trip_duration', 'image', 'user_id']);
+        $user = Auth::check() ? Auth::user()->name : 'Anonymous';
+        $userTrips = [];
+        foreach($trips as $trip) {
+            if(Auth::user()->id == $trip['user_id']) {
+                $userTrips[] = $trip;
+            }
+        }
+        $userTrips = collect($userTrips);
 
         return response()
             ->json([
-               'trips' => $trips
+               'trips' => $trips,
+                'userTrips' => $userTrips,
+                'user' => $user
             ]);
     }
 
@@ -95,8 +106,7 @@ class TripController extends Controller
             'title' => 'required|max:255',
             'trip_date' => 'required|date',
             'trip_duration' => 'required|numeric',
-            'description' => 'required|max:65535',
-            'image' => 'required|image'
+            'description' => 'required|max:65535'
         ]);
 
         $trip = $request->user()->trips()->findOrFail($id);
